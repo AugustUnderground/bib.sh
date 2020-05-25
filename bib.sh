@@ -68,7 +68,7 @@ bibify()
         AUTHOR="author = $(echo $AUTHORS |  tr "\n" " ")"
         PUBLISHER="publisher = $PUBLISHER"
         YEAR="year = $YEAR"
-        printf '@%s{\t%s,\n\t%s,\n\t%s,\n\t%s,\n\t%s\n}'\
+        printf '@%s{\t%s,\n\t%s,\n\t%s,\n\t%s,\n\t%s\n}\n\n'\
                "$TYPE" "$LABEL" "$TITLE" "$AUTHOR" "$PUBLISHER" "$YEAR"
     elif [ "$FORMAT" = "ROFF" ]; then
         LABEL="%L $ALABEL$YLABEL"
