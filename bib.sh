@@ -76,7 +76,7 @@ bibify()
         AUTHOR="$(echo $AUTHORS | tr "," "\n" | sed -e 's/^[ \t]*//' | awk '{print "%A " $0}' | tr -d "\"")"
         PUBLISHER="%I $(echo $PUBLISHER | tr -d "\"")"
         YEAR="%D $(echo $YEAR | tr -d "\"")"
-        printf '%s\n%s\n%s\n%s\n%s\n'\
+        printf '%s\n%s\n%s\n%s\n%s\n\n'\
                "$LABEL"  "$TITLE" "$AUTHOR" "$PUBLISHER" "$YEAR"
     fi
 }
