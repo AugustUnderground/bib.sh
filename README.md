@@ -28,6 +28,14 @@ printed to stdout.
 }
 ```
 
+To append a reference to a bibliography simply redirect the output to that file:
+
+```{bash}
+$ ./bib.sh -l unix programming kernighan >> library.bib
+```
+
+After selecting the source, there wont be any output in the terminal.
+
 ## Options
 
 The `-l` option is the default, and produces BibTex output.
