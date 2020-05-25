@@ -20,7 +20,7 @@ into fzf/fzy. After selecting one, you'll get the BibTex reference
 printed to stdout.
 
 ```{bash}
-@book{  label = ritchie22,
+@book{  label = ritchie88,
         title = "C Programming Language",
         author = "Brian W. Kernighan", "Dennis Ritchie" ,
         publisher = "Prentice Hall",
