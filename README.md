@@ -42,5 +42,5 @@ $ ./bib.sh -r unix programming kernighan
 
 + [pybib](https://github.com/jgilchrist/pybib)
 + [bibtex-search](https://github.com/ekmartin/bibtex-search)
-+ [sibnbib](https://github.com/mkomod/isbnbib)
++ [isbnbib](https://github.com/mkomod/isbnbib)
 + [BibtexRetrieval](https://github.com/frrobert2/BibtexRetrieval)
