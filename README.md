@@ -24,7 +24,7 @@ printed to stdout.
         title = "C Programming Language",
         author = "Brian W. Kernighan", "Dennis Ritchie" ,
         publisher = "Prentice Hall",
-        year = "1988-03-22"
+        year = "1988"
 }
 ```
 
