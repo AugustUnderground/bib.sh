@@ -12,7 +12,7 @@ Query [Google Books](https://developers.google.com/books) from the Terminal and 
 ## Usage
 
 ```{bash}
-$ ./bib.sh unix programming kernighan
+$ ./bib.sh c programming language ritchie
 ```
 
 This will pipe the titles retrieved from [Google Books](https://developers.google.com/books)
@@ -20,18 +20,18 @@ into fzf/fzy. After selecting one, you'll get the BibTex reference
 printed to stdout.
 
 ```{bash}
-@book{  label = pike1984,
-        title = "The UNIX Programming Environment",
-        author = "Brian W. Kernighan", "Rob Pike" ,
-        publisher = null,
-        year = "1984"
+@book{  label = ritchie22,
+        title = "C Programming Language",
+        author = "Brian W. Kernighan", "Dennis Ritchie" ,
+        publisher = "Prentice Hall",
+        year = "1988-03-22"
 }
 ```
 
 To append a reference to a bibliography simply redirect the output to that file:
 
 ```{bash}
-$ ./bib.sh -l unix programming kernighan >> library.bib
+$ ./bib.sh -l c programming language ritchie >> library.bib
 ```
 
 After selecting the source, there wont be any output in the terminal.
@@ -43,7 +43,7 @@ For Roff/Refer output use the `-r` flag:
 
 
 ```{bash}
-$ ./bib.sh -r unix programming kernighan
+$ ./bib.sh -r c programming language ritchie
 ```
 
 ## Related Work
