@@ -1,0 +1,46 @@
+# Bibliography.Shell
+
+My script for retrieving Citations from the commandline.
+Query [Google Books](https://developers.google.com/books) from the Terminal and retrieve BibTex or Roff/Refer Citation.
+
+## Dependecies
+
++ [curl](https://curl.haxx.se/)
++ [jq](https://stedolan.github.io/jq/)
++ [fzy](https://github.com/jhawthorn/fzy) or [fzf](https://github.com/junegunn/fzf)
+
+## Usage
+
+```{bash}
+$ ./bib.sh unix programming kernighan
+```
+
+This will pipe the titles retrieved from [Google Books](https://developers.google.com/books)
+into fzf/fzy. After selecting one, you'll get the BibTex reference
+printed to stdout.
+
+```{bash}
+@book{  label = pike1984,
+        title = "The UNIX Programming Environment",
+        author = "Brian W. Kernighan", "Rob Pike" ,
+        publisher = null,
+        year = "1984"
+}
+```
+
+## Options
+
+The `-l` option is the default, and produces BibTex output.
+For Roff/Refer output use the `-r` flag:
+
+
+```{bash}
+$ ./bib.sh -r unix programming kernighan
+```
+
+## Related Work
+
++ [pybib](https://github.com/jgilchrist/pybib)
++ [bibtex-search](https://github.com/ekmartin/bibtex-search)
++ [sibnbib](https://github.com/mkomod/isbnbib)
++ [BibtexRetrieval](https://github.com/frrobert2/BibtexRetrieval)
