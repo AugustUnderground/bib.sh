@@ -12,6 +12,12 @@ Query [Google Books](https://developers.google.com/books) from the Terminal and 
 ## Usage
 
 ```bash
+$ ./bib.sh <query>
+```
+
+Example: Searching for "layout design scheible"
+
+```bash
 $ ./bib.sh layout design scheible
 ```
 
