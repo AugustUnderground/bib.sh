@@ -11,27 +11,27 @@ Query [Google Books](https://developers.google.com/books) from the Terminal and 
 
 ## Usage
 
-```{bash}
-$ ./bib.sh c programming language ritchie
+```bash
+$ ./bib.sh layout design scheible
 ```
 
 This will pipe the titles retrieved from [Google Books](https://developers.google.com/books)
 into fzf/fzy. After selecting one, you'll get the BibTex reference
 printed to stdout.
 
-```{bash}
-@book{  label = ritchie88,
-        title = "C Programming Language",
-        author = "Brian W. Kernighan", "Dennis Ritchie" ,
-        publisher = "Prentice Hall",
-        year = "1988"
+```tex
+@book{  label = scheible19,
+        title = "Fundamentals of Layout Design for Electronic Circuits",
+        author = "Jens Lienig", "Juergen Scheible" ,
+        publisher = "Springer Nature",
+        year = "2020-03-19"
 }
 ```
 
 To append a reference to a bibliography simply redirect the output to that file:
 
-```{bash}
-$ ./bib.sh -l c programming language ritchie >> library.bib
+```bash
+$ ./bib.sh -l layout design scheible >> library.bib
 ```
 
 After selecting the source, there wont be any output in the terminal.
@@ -42,8 +42,8 @@ The `-l` option is the default, and produces BibTex output.
 For Roff/Refer output use the `-r` flag:
 
 
-```{bash}
-$ ./bib.sh -r c programming language ritchie
+```bash
+$ ./bib.sh -r layout design scheible
 ```
 
 ## Related Work
