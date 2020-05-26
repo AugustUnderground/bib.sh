@@ -19,7 +19,7 @@ This will pipe the titles retrieved from [Google Books](https://developers.googl
 into fzf/fzy. After selecting one, you'll get the BibTex reference
 printed to stdout.
 
-```tex
+```
 @book{  label = scheible19,
         title = "Fundamentals of Layout Design for Electronic Circuits",
         author = "Jens Lienig", "Juergen Scheible" ,
