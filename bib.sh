@@ -1,6 +1,7 @@
 #!/bin/sh
 
 FORMAT="LATEX"
+ENGINE="BIBTEX"
 
 nofuzzy()
 {
@@ -63,11 +64,11 @@ bibify()
     LABEL="$ALABEL$YLABEL"
 
     if [ "$FORMAT" = "LATEX" ]; then
-        LABEL="label = $ALABEL$YLABEL"
-        TITLE="title = $TITLE"
-        AUTHOR="author = $(echo $AUTHORS |  tr "\n" " ")"
-        PUBLISHER="publisher = $PUBLISHER"
-        YEAR="year = $YEAR"
+        LABEL="$ALABEL$YLABEL"
+        TITLE="title = {$(echo $TITLE | tr -d "\"")}"
+        AUTHOR="author = {$(echo $AUTHORS |  tr "\n" " " | tr -d "\"")}"
+        PUBLISHER="publisher = {$(echo $PUBLISHER | tr -d "\"")}" 
+        YEAR="year = {$(echo $YEAR | tr -d "\"")}"
         printf '@%s{\t%s,\n\t%s,\n\t%s,\n\t%s,\n\t%s\n}\n\n'\
                "$TYPE" "$LABEL" "$TITLE" "$AUTHOR" "$PUBLISHER" "$YEAR"
     elif [ "$FORMAT" = "ROFF" ]; then
@@ -81,9 +82,27 @@ bibify()
     fi
 }
 
-main()
+bibtex_search()
 {
-    QUERY=$(echo $@ | sed -Ee 's/ /+/g')
+    URL=http://bibtexsearch.com/search\?auth\=web\&q\=
+    
+    JSON=$(curl -sL $URL$QUERY | jq | sed 's/\\n/\n/g; s/\\t/\t/g')
+
+    SELECT=$(echo $JSON | jq '.[] | ._source.bibtex + ";" + ._id' \
+                        | awk -F'[@{}]' '{print $2 ": " $4 " " $6 " " $NF}' \
+                        | fzf)
+
+    ID=$(echo $SELECT | cut -d\; -f2 | tr -d "\"")
+
+    RES=$(echo $JSON | jq --arg ID $ID '.[] | select(._id == $ID) | ._source.bibtex' \
+                     | tr -d "\"" \
+                     | sed -Ee 's/ , / ,\n\t/g' \
+                     | sed -Ee 's/} }/}\n}/g')
+    printf "$RES\n\n"
+}
+
+google_search()
+{
     RESULTS_DB="/tmp/bibterm.json"
 
     curl -s https://www.googleapis.com/books/v1/volumes?q=$QUERY | jq > $RESULTS_DB
@@ -102,23 +121,42 @@ main()
     bibify
 
     rm $RESULTS_DB
+}
+
+main()
+{
+    if [ "$ENGINE" = "BIBTEX" ]; then
+        QUERY=$(echo "$@" | sed -Ee 's/ /%20/g')
+        bibtex_search
+    elif [ "$ENGINE" = "GOOGLE" ]; then
+        QUERY=$(echo $@ | sed -Ee 's/ /+/g')
+        google_search
+    else
+        exit 1
+    fi
+
     exit 0
 }
 
 help() {
     echo "USAGE: $0 [-l|r] <query>
-        [-l] BibTex output
+        [-l] BibTex output (default)
         [-r] Roff/Refer output
+        [-b] use http://www.bibtexsearch.com/ (default)
+        [-g] use https://www.googleapis.com/books/v1/volumes
+
         <query> is some text related to the book you're searching for."
     exit 0
 }
 
-OPTIONS='hlr'
+OPTIONS='hlrgb'
 while getopts $OPTIONS OPT; do
     case $OPT in
         h) help ;;
         l) FORMAT="LATEX" ;;
         r) FORMAT="ROFF" ;;
+        g) ENGINE="GOOGLE" ;;
+        b) ENGINE="BIBTEX" ;;
         \?)
             echo "Unknown option: -${OPTARG}" >&2
             exit 1

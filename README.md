@@ -15,7 +15,7 @@ Query [Google Books](https://developers.google.com/books) from the Terminal and 
 $ ./bib.sh <query>
 ```
 
-Example: Searching for "layout design scheible"
+Example: Searching for "layout design scheible" on google
 
 ```bash
 $ ./bib.sh layout design scheible
@@ -44,9 +44,12 @@ After selecting the source, there wont be any output in the terminal.
 
 ## Options
 
-The `-l` option is the default, and produces BibTex output.
-For Roff/Refer output use the `-r` flag:
++ `-l` bibtex output
++ `-r` Roff output
++ `-b` search [bibtex](http://www.bibtexsearch.com/)
++ `-g` search [Google Books](https://developers.google.com/books)
 
+For Roff/Refer output use the `-r` flag, this only works with google books.
 
 ```bash
 $ ./bib.sh -r layout design scheible
